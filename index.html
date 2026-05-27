@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamified Educational Data Collector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            /* Vibrant Gamified Palette */
+            --primary: #8b5cf6; 
+            --primary-shadow: #6d28d9;
+            --secondary: #64748b; 
+            
+            /* Action Colors */
+            --yakin: #22c55e;
+            --yakin-shadow: #166534;
+            --ragu: #f59e0b;
+            --ragu-shadow: #b45309;
+            --tidaktahu: #f43f5e;
+            --tidaktahu-shadow: #be123c;
+            
+            --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 100%);
+            --card-bg: #ffffff;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Nunito', sans-serif; 
+            background: var(--bg-gradient); 
+            padding: 20px; 
+            color: #334155; 
+            line-height: 1.6; 
+            min-height: 100vh;
+        }
+        
+        /* Layout Wrappers */
+        .layout-wrapper { display: flex; gap: 24px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+        
+        /* Sidebar (Left) */
+        .sidebar { 
+            flex: 0 0 340px; 
+            background: var(--card-bg); 
+            padding: 24px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
+            border: 4px solid #fff;
+            position: sticky; 
+            top: 20px; 
+        }
+        
+        /* Main Content (Right) */
+        .main-content { 
+            flex: 1; 
+            background: var(--card-bg); 
+            padding: 32px 40px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
+            border: 4px solid #fff;
+            min-width: 0; 
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* Panel Colored States */
+        .main-content.panel-yakin { background-color: #f0fdf4; border-color: #bbf7d0; }
+        .main-content.panel-ragu { background-color: #fffbeb; border-color: #fde047; }
+        .main-content.panel-tidaktahu { background-color: #fff1f2; border-color: #fecaca; }
+
+        .meta-info { display: flex; justify-content: space-between; font-size: 14px; color: var(--secondary); font-weight: 700; margin-bottom: 24px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 16px; }
+        
+        /* Navigation Grid */
+        .q-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+        .nav-num { 
+            aspect-ratio: 1; 
+            border: 2px solid #cbd5e1; 
+            border-bottom-width: 4px; 
+            display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; border-radius: 12px; font-weight: 800; font-size: 16px; 
+            transition: all 0.1s ease; background: #fff; color: var(--secondary); 
+        }
+        .nav-num:active { border-bottom-width: 2px; transform: translateY(2px); }
+        .nav-num:hover:not(.active) { background: #f8fafc; }
+        
+        /* Nav States */
+        .nav-num.active { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 0 4px #ddd6fe; }
+        .nav-num.yakin { background: #dcfce7; color: #15803d; border-color: var(--yakin); }
+        .nav-num.ragu { background: #fef3c7; color: #b45309; border-color: var(--ragu); }
+        .nav-num.tidaktahu { background: #ffe4e6; color: #be123c; border-color: var(--tidaktahu); }
+
+        /* Typography & Badges */
+        h2 { font-weight: 800; font-size: 1.4rem; margin-top: 12px; margin-bottom: 24px; color: #1e293b; }
+        .badge { font-size: 12px; padding: 6px 12px; border-radius: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge.easy { background: #dcfce7; color: #15803d; }
+        .badge.medium { background: #fef9c3; color: #a16207; }
+        .badge.hard { background: #fee2e2; color: #b91c1c; }
+
+        /* Hints Box */
+        .hint-box { margin-bottom: 24px; padding: 20px; background: rgba(255, 255, 255, 0.6); border: 2px solid #fde68a; border-radius: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .hint-item { font-size: 0.95em; color: #92400e; font-weight: 600; border-bottom: 2px dotted #fcd34d; padding-bottom: 10px; }
+        .hint-item:last-child { border-bottom: none; padding-bottom: 0; }
+        
+        /* Options */
+        .options { display: grid; gap: 14px; margin-bottom: 35px; }
+        .opt-btn { 
+            padding: 16px 24px; 
+            border: 2px solid #cbd5e1; 
+            border-bottom-width: 6px; 
+            border-radius: 16px; text-align: left; cursor: pointer; 
+            transition: all 0.1s ease; font-weight: 700; background: #fff; font-size: 16px; color: #475569;
+        }
+        .opt-btn:active { border-bottom-width: 2px; transform: translateY(4px); }
+        .opt-btn:hover:not(.selected) { background: #f8fafc; border-color: #94a3b8; }
+        .opt-btn.selected { 
+            background: #ede9fe; 
+            border-color: var(--primary); 
+            color: var(--primary-shadow); 
+        }
+        
+        /* Confidence Buttons */
+        .confidence-box { margin-bottom: 30px; padding: 24px; background: rgba(255, 255, 255, 0.5); border-radius: 20px; border: 2px dashed #cbd5e1; }
+        .confidence-box label { font-size: 15px; font-weight: 800; color: #334155; display: block; margin-bottom: 16px; text-align: center; }
+        .conf-group { display: flex; gap: 12px; }
+        .conf-btn { 
+            flex: 1; padding: 14px 10px; 
+            border: 2px solid #cbd5e1; border-bottom-width: 5px;
+            border-radius: 14px; font-weight: 800; font-size: 14px; 
+            cursor: pointer; transition: all 0.1s; background: #fff; color: var(--secondary); 
+            font-family: 'Nunito', sans-serif;
+        }
+        .conf-btn:active { border-bottom-width: 2px; transform: translateY(3px); }
+        
+        .conf-btn.yakin.selected { background: var(--yakin); border-color: var(--yakin-shadow); color: white; }
+        .conf-btn.ragu.selected { background: var(--ragu); border-color: var(--ragu-shadow); color: white; }
+        .conf-btn.tidaktahu.selected { background: var(--tidaktahu); border-color: var(--tidaktahu-shadow); color: white; }
+
+        /* Actions Footer */
+        .footer { display: flex; justify-content: space-between; align-items: center; border-top: 2px dashed #e2e8f0; padding-top: 24px; }
+        .action-group { display: flex; gap: 12px; }
+        
+        /* Generic Buttons */
+        .btn { padding: 14px 24px; border-radius: 14px; font-weight: 800; cursor: pointer; transition: all 0.1s; border: 2px solid transparent; border-bottom-width: 5px; font-size: 15px; font-family: 'Nunito', sans-serif; }
+        .btn:active { border-bottom-width: 2px; transform: translateY(3px); }
+        
+        .btn-hint { background: #fbbf24; border-color: #d97706; color: #78350f; display: flex; align-items: center; gap: 6px; }
+        .btn-prev { background: #e2e8f0; border-color: #94a3b8; color: #475569; }
+        .btn-next { background: var(--primary); border-color: var(--primary-shadow); color: white; }
+        .btn-submit { background: var(--yakin); border-color: var(--yakin-shadow); color: white; padding: 16px 32px; font-size: 18px; border-radius: 16px; margin-top: 10px;}
+        
+        /* Logs UI */
+        .log-section { margin-top: 24px; background: #1e293b; border-radius: 20px; padding: 4px; border: 4px solid #cbd5e1; }
+        .log-header { padding: 14px 20px; color: white; font-weight: 800; border-bottom: 2px dashed #334155; font-size: 15px;}
+        pre { color: #a5b4fc; padding: 20px; font-size: 13px; width: 100%; overflow-x: auto; margin: 0; font-family: monospace; line-height: 1.5;}
+        
+        .hidden { display: none !important; }
+        
+        /* =========================================================
+           REVIEW UI REDESIGN - Kompak Pas 1 Halaman Tanpa Scroll PC
+           ========================================================= */
+        #review-ui { text-align: center; padding: 10px 0; }
+        .review-grid { 
+            display: grid; 
+            grid-template-columns: repeat(6, 1fr); /* 6 Kolom x 6 Baris = 36 Kotak */
+            gap: 12px; 
+            max-width: 360px; /* Diperkecil dari 450px agar pas 1 halaman penuh di layar PC */
+            margin: 20px auto; /* Mengurangi margin vertikal */
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .layout-wrapper { flex-direction: column; }
+            .sidebar { flex: none; width: 100%; position: static; padding: 20px; }
+            .main-content { padding: 24px; }
+            .q-nav { grid-template-columns: repeat(10, 1fr); }
+            .conf-group { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .q-nav { grid-template-columns: repeat(6, 1fr); }
+            .footer { flex-direction: column; gap: 16px; }
+            .action-group { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+            .btn-hint { width: 100%; justify-content: center; }
+            .review-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-wrapper" id="app">
+    
+    <aside class="sidebar" id="sidebar-ui">
+        <div class="meta-info hidden">
+            <span id="global-id-label">ID: Loading...</span>
+            <span id="visit-counter">Attempt: 1</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 800; color: #94a3b8; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">Peta Perjalanan</div>
+        <div class="q-nav" id="q-nav-grid"></div>
+    </aside>
+
+    <main class="main-content" id="main-panel">
+        
+        <div id="quiz-ui">
+            <div style="margin-bottom: 12px;">
+                <span id="q-difficulty" class="badge"></span>
+            </div>
+            
+            <h2 id="q-text">Loading Question...</h2>
+            
+            <div id="hint-container" class="hidden">
+                <div class="hint-box" id="hint-list"></div>
+            </div>
+
+            <div class="options" id="options-list"></div>
+
+            <div class="confidence-box">
+                <label>Seberapa yakin kamu dengan tebakan ini? 🤔</label>
+                <div class="conf-group">
+                    <button class="conf-btn yakin" onclick="setConfidence('yakin')">Pasti Benar! 🤩</button>
+                    <button class="conf-btn ragu" onclick="setConfidence('ragu-ragu')">Agak Ragu 🧐</button>
+                    <button class="conf-btn tidaktahu" onclick="setConfidence('tidak tahu')">Nembak Aja 🫣</button>
+                </div>
+            </div>
+
+            <div class="footer">
+                <button class="btn btn-hint" onclick="requestHint()" id="hint-btn">💡 Clue (<span id="hint-count">0</span>/3)</button>
+                <div class="action-group">
+                    <button class="btn btn-prev" onclick="prevQ()">Kembali</button>
+                    <button class="btn btn-next" onclick="nextQ()" id="next-btn">Lanjut 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="review-ui" class="hidden">
+            <h2 style="font-size: 1.8rem; color: #1e293b; margin-top: 5px;">Misi Selesai! 🎉</h2>
+            <p style="color: var(--secondary); margin-bottom: 5px; font-size: 15px; font-weight: 600;">Waktu telah dihentikan. Cek ulang jawaban yang masih ragu sebelum disetor ya!</p>
+            
+            <!-- Grid Navigasi Akhir yang Dioptimasi Tanpa Scroll PC -->
+            <div class="review-grid" id="review-grid"></div>
+            
+            <button class="btn btn-submit" onclick="showFinalLogs()">✅ Kunci Jawaban & Kirim Data</button>
+        </div>
+
+        <div id="log-ui" class="hidden">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 1.8rem;">Misi Selesai! 🎉</h2>
+            <p style="text-align: center; color: var(--secondary); margin-bottom: 30px;">
+                Data telah berhasil direkam. Silakan unduh file di bawah ini dan unggah ke Google Form yang disediakan.
+            </p>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
+                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white; width: 100%; max-width: 300px;" 
+                        onclick="downloadData('summary-log', 'summary_data.json')">📥 Download Summary (JSON)</button>
+                
+                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white; width: 100%; max-width: 300px;" 
+                        onclick="downloadData('q-session-log', 'session_data.json')">📥 Download Raw Sessions (JSON)</button>
+                
+                <button class="btn btn-prev" style="color: var(--secondary); margin-top: 20px;" onclick="location.reload()">🔄 Petualangan Baru</button>
+            </div>
+            
+            <pre id="summary-log" class="hidden"></pre>
+            <pre id="q-session-log" class="hidden"></pre>
+        </div>
+
+        <!-- <div id="log-ui" class="hidden">
+            <h2 style="text-align: center; margin-bottom: 15px; font-size: 1.8rem;">Brankas Data 📂</h2>
+            
+            <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap;">
+                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white;" onclick="copyLog('summary-log', this)">📋 Salin Data Bersih</button>
+                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white;" onclick="copyLog('q-session-log', this)">📋 Salin Data Mentah</button>
+                <button class="btn btn-prev" style="color: var(--secondary);" onclick="location.reload()">🔄 Petualangan Baru</button>
+            </div>
+            
+            <div class="log-section">
+                <div class="log-header">
+                    <span>📊 Summary (Fitur Bersih)</span>
+                </div>
+                <pre id="summary-log"></pre>
+            </div>
+
+            <div class="log-section" style="margin-top: 30px;">
+                <div class="log-header">
+                    <span>📝 Q_Sessions (Data Mentah)</span>
+                </div>
+                <pre id="q-session-log"></pre>
+            </div>
+        </div> -->
+
+    </main>
+</div>
+
+<script src="soal.js"></script>
+<script>
+let questions = []; 
+let currentIdx = 0;
+let globalSessionId = "SESSION_" + Math.random().toString(36).substr(2, 8);
+let qSessions = []; 
+let userAnswers = {}; 
+let visitCounts = {}; 
+
+let startTime, firstActionTime, answerChanges, focusLost, currentHintLevel;
+let optionClickHistory = [];
+let lastHintTimestamp = null;
+let totalHintReadTime = 0;
+
+function stratifyAndShuffle(bank) {
+    const grouped = {};
+    bank.forEach(q => {
+        if (!grouped[q.topic]) grouped[q.topic] = { level1: [], level2: [], level3: [] };
+        const diff = q.difficulty.toLowerCase();
+        if (diff === 'beginner' || diff === 'easy') grouped[q.topic].level1.push(q);
+        else if (diff === 'intermediate' || diff === 'medium') grouped[q.topic].level2.push(q);
+        else if (diff === 'advanced' || diff === 'hard') grouped[q.topic].level3.push(q);
+    });
+
+    let selectedQuestions = [];
+    for (let topic in grouped) {
+        const levels = grouped[topic];
+        if (levels.level1.length > 0) selectedQuestions.push(levels.level1[Math.floor(Math.random() * levels.level1.length)]);
+        if (levels.level2.length > 0) selectedQuestions.push(levels.level2[Math.floor(Math.random() * levels.level2.length)]);
+        if (levels.level3.length > 0) selectedQuestions.push(levels.level3[Math.floor(Math.random() * levels.level3.length)]);
+    }
+
+    for (let i = selectedQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [selectedQuestions[i], selectedQuestions[j]] = [selectedQuestions[j], selectedQuestions[i]];
+    }
+    return selectedQuestions;
+}
+
+function initApp() {
+    if (typeof fullBank !== 'undefined' && fullBank.length > 0) {
+        questions = stratifyAndShuffle(fullBank);
+        document.getElementById('global-id-label').innerText = "ID: " + globalSessionId;
+        
+        if(questions.length > 0) {
+            initQ(0);
+        } else {
+            document.getElementById('q-text').innerText = "Gagal memproses pengacakan soal.";
+        }
+    } else {
+        document.getElementById('q-text').innerText = "Error: File 'soal.js' tidak terdeteksi atau kosong.";
+    }
+}
+
+function initQ(idx) {
+    startTime = Date.now();
+    firstActionTime = null;
+    answerChanges = 0; 
+    focusLost = 0;
+    optionClickHistory = [];
+    lastHintTimestamp = null;
+    totalHintReadTime = 0;
+    
+    const q = questions[idx];
+    visitCounts[q.id] = (visitCounts[q.id] || 0) + 1;
+    currentHintLevel = userAnswers[q.id]?.hintLevel || 0;
+    
+    if(!userAnswers[q.id]) userAnswers[q.id] = {};
+    if(!userAnswers[q.id].conf) userAnswers[q.id].conf = 'yakin';
+
+    const diffBadge = document.getElementById('q-difficulty');
+    diffBadge.innerText = `${q.topic} • ${q.difficulty}`;
+    diffBadge.className = `badge ${q.difficulty.toLowerCase().replace('beginner', 'easy').replace('intermediate', 'medium').replace('advanced', 'hard')}`;
+
+    document.getElementById('q-text').innerText = q.text;
+    document.getElementById('visit-counter').innerText = `Attempt: ${visitCounts[q.id]}`;
+    document.getElementById('hint-count').innerText = currentHintLevel;
+    
+    const hintContainer = document.getElementById('hint-container');
+    const hintList = document.getElementById('hint-list');
+    hintList.innerHTML = '';
+    
+    if (currentHintLevel > 0) {
+        hintContainer.classList.remove('hidden');
+        for(let i = 0; i < currentHintLevel; i++) {
+            const hintItem = document.createElement('div');
+            hintItem.className = 'hint-item';
+            hintItem.innerText = `Clue ${i+1}: ${q.hints[i]}`;
+            hintList.appendChild(hintItem);
+        }
+    } else {
+        hintContainer.classList.add('hidden');
+    }
+    
+    const nextBtn = document.getElementById('next-btn');
+    if(idx === questions.length - 1) {
+        nextBtn.innerHTML = "Selesai 🏁";
+        nextBtn.style.background = "var(--yakin)";
+        nextBtn.style.borderColor = "var(--yakin-shadow)";
+    } else {
+        nextBtn.innerHTML = "Lanjut 🚀";
+        nextBtn.style.background = "var(--primary)";
+        nextBtn.style.borderColor = "var(--primary-shadow)";
+    }
+
+    renderOptions();
+    updateMainPanelUI(); 
+    renderNav('q-nav-grid');
+}
+
+function renderOptions() {
+    const q = questions[currentIdx];
+    const optContainer = document.getElementById('options-list');
+    optContainer.innerHTML = '';
+    
+    q.choices.forEach((optText, i) => {
+        const btn = document.createElement('div');
+        btn.className = `opt-btn ${userAnswers[q.id]?.choice === i ? 'selected' : ''}`;
+        btn.innerHTML = `<span>${optText}</span>`;
+        btn.onclick = () => selectOpt(i);
+        optContainer.appendChild(btn);
+    });
+}
+
+function updateMainPanelUI() {
+    const qId = questions[currentIdx].id;
+    const currentConf = userAnswers[qId]?.conf;
+    const isAnswered = userAnswers[qId]?.choice !== undefined;
+    
+    document.querySelectorAll('.conf-btn').forEach(btn => btn.classList.remove('selected'));
+    if(currentConf === 'yakin') document.querySelector('.conf-btn.yakin').classList.add('selected');
+    if(currentConf === 'ragu-ragu') document.querySelector('.conf-btn.ragu').classList.add('selected');
+    if(currentConf === 'tidak tahu') document.querySelector('.conf-btn.tidaktahu').classList.add('selected');
+
+    const mainPanel = document.getElementById('main-panel');
+    mainPanel.classList.remove('panel-yakin', 'panel-ragu', 'panel-tidaktahu'); 
+    
+    if (isAnswered) {
+        if(currentConf === 'yakin') mainPanel.classList.add('panel-yakin');
+        if(currentConf === 'ragu-ragu') mainPanel.classList.add('panel-ragu');
+        if(currentConf === 'tidak tahu') mainPanel.classList.add('panel-tidaktahu');
+    }
+}
+
+function setConfidence(val) {
+    calcHintReadTime(); 
+    const qId = questions[currentIdx].id;
+    if(!userAnswers[qId]) userAnswers[qId] = {};
+    userAnswers[qId].conf = val;
+    
+    updateMainPanelUI();
+    if(userAnswers[qId].choice !== undefined) {
+        renderNav('q-nav-grid');
+    }
+}
+
+function trackFirstAction() {
+    if (!firstActionTime) firstActionTime = (Date.now() - startTime) / 1000;
+}
+
+function calcHintReadTime() {
+    if (lastHintTimestamp) {
+        totalHintReadTime += (Date.now() - lastHintTimestamp) / 1000;
+        lastHintTimestamp = null; 
+    }
+}
+
+function selectOpt(idx) {
+    trackFirstAction();
+    calcHintReadTime(); 
+    
+    const latency = ((Date.now() - startTime) / 1000).toFixed(2);
+    const q = questions[currentIdx];
+    const isAnsCorrect = (idx === q.answer); 
+
+    optionClickHistory.push({ 
+        choice_index: idx, 
+        is_correct_choice: isAnsCorrect,
+        timestamp_sec: parseFloat(latency) 
+    });
+
+    const qId = q.id;
+    if(!userAnswers[qId]) userAnswers[qId] = {};
+    if (userAnswers[qId].choice !== undefined && userAnswers[qId].choice !== idx) {
+        answerChanges++;
+    }
+    
+    userAnswers[qId].choice = idx;
+    renderOptions(); 
+    updateMainPanelUI(); 
+    renderNav('q-nav-grid');
+}
+
+function requestHint() {
+    trackFirstAction();
+    calcHintReadTime(); 
+    
+    if (currentHintLevel < 3) {
+        currentHintLevel++;
+        lastHintTimestamp = Date.now(); 
+        
+        const q = questions[currentIdx];
+        const qId = q.id;
+        
+        if(!userAnswers[qId]) userAnswers[qId] = {};
+        userAnswers[qId].hintLevel = currentHintLevel;
+        
+        document.getElementById('hint-count').innerText = currentHintLevel;
+        
+        const hintContainer = document.getElementById('hint-container');
+        const hintList = document.getElementById('hint-list');
+        
+        hintContainer.classList.remove('hidden');
+        hintList.innerHTML = '';
+        
+        for(let i = 0; i < currentHintLevel; i++) {
+            const hintItem = document.createElement('div');
+            hintItem.className = 'hint-item';
+            hintItem.innerText = `Clue ${i+1}: ${q.hints[i]}`;
+            hintList.appendChild(hintItem);
+        }
+    }
+}
+
+window.onblur = () => focusLost++;
+
+function captureSession() {
+    calcHintReadTime(); 
+    const q = questions[currentIdx];
+    const duration = parseFloat(((Date.now() - startTime) / 1000).toFixed(2));
+    const conf = userAnswers[q.id]?.conf || 'yakin';
+    
+    let everHitCorrect = optionClickHistory.some(h => h.is_correct_choice);
+    let changedAfterCorrect = false;
+    let clicksToHitCorrect = null;
+
+    for (let i = 0; i < optionClickHistory.length; i++) {
+        if (optionClickHistory[i].is_correct_choice) {
+            if (clicksToHitCorrect === null) clicksToHitCorrect = i + 1; 
+        } else if (clicksToHitCorrect !== null) {
+            changedAfterCorrect = true; 
+        }
+    }
+
+    const sessionFinalChoice = userAnswers[q.id]?.choice;
+    const sessionFinalIsCorrect = (sessionFinalChoice === q.answer);
+    const isIdeal = duration <= (q.ideal_duration || 60);
+
+    const session = {
+        global_session_id: globalSessionId,
+        q_session_id: `Q_SESS_${Math.random().toString(36).substr(2, 5)}`,
+        question_id: q.id,
+        topic: q.topic,
+        difficulty: q.difficulty,
+        attempt_number: visitCounts[q.id],
+        initial_latency: firstActionTime || duration,
+        duration_sec: duration,
+        is_ideal_duration: isIdeal, 
+        ideal_duration_target: q.ideal_duration || 60,
+        hint_tier_reached: currentHintLevel,
+        hint_read_duration_sec: parseFloat(totalHintReadTime.toFixed(2)),
+        option_click_history: [...optionClickHistory], 
+        answer_changes: answerChanges,             
+        doubt_pattern: {
+            ever_hit_correct: everHitCorrect,
+            clicks_to_hit_correct: clicksToHitCorrect, 
+            changed_after_correct: changedAfterCorrect,
+            session_final_choice_index: sessionFinalChoice !== undefined ? sessionFinalChoice : null,
+            session_final_is_correct: sessionFinalChoice !== undefined ? sessionFinalIsCorrect : null
+        },
+        focus_lost_count: focusLost,
+        confidence: conf
+    };
+    qSessions.push(session);
+}
+
+function jumpTo(idx) { 
+    document.getElementById('review-ui').classList.add('hidden');
+    document.getElementById('quiz-ui').classList.remove('hidden');
+    document.getElementById('sidebar-ui').classList.remove('hidden'); 
+    
+    document.getElementById('main-panel').classList.remove('panel-yakin', 'panel-ragu', 'panel-tidaktahu');
+    
+    if(!document.getElementById('quiz-ui').classList.contains('hidden')){
+        captureSession(); 
+    }
+    currentIdx = idx; 
+    initQ(idx); 
+}
+
+function nextQ() { 
+    if(currentIdx < questions.length - 1) {
+        jumpTo(currentIdx + 1); 
+    } else {
+        captureSession();
+        document.getElementById('quiz-ui').classList.add('hidden');
+        document.getElementById('sidebar-ui').classList.add('hidden'); 
+        
+        document.getElementById('main-panel').classList.remove('panel-yakin', 'panel-ragu', 'panel-tidaktahu');
+        
+        document.getElementById('review-ui').classList.remove('hidden');
+        renderNav('review-grid');
+    }
+}
+
+function prevQ() { if(currentIdx > 0) jumpTo(currentIdx - 1); }
+
+function renderNav(containerId) {
+    const nav = document.getElementById(containerId);
+    if(!nav) return;
+    nav.innerHTML = '';
+    questions.forEach((q, i) => {
+        const d = document.createElement('div');
+        
+        let confClass = '';
+        const ans = userAnswers[q.id];
+        
+        if (ans && ans.choice !== undefined) {
+            if (ans.conf === 'yakin') confClass = 'yakin';
+            if (ans.conf === 'ragu-ragu') confClass = 'ragu';
+            if (ans.conf === 'tidak tahu') confClass = 'tidaktahu';
+        }
+
+        d.className = `nav-num ${i === currentIdx && containerId !== 'review-grid' ? 'active' : ''} ${confClass}`;
+        d.innerText = i + 1;
+        d.onclick = () => jumpTo(i);
+        nav.appendChild(d);
+    });
+}
+
+function copyLog(elementId, btnElement) {
+    const textToCopy = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = btnElement.innerHTML;
+        
+        btnElement.innerHTML = "✓ Berhasil Disalin!";
+        btnElement.style.background = "var(--yakin)";
+        btnElement.style.borderColor = "var(--yakin-shadow)";
+        
+        setTimeout(() => {
+            btnElement.innerHTML = originalText;
+            btnElement.style.background = "var(--primary)";
+            btnElement.style.borderColor = "var(--primary-shadow)";
+        }, 2000);
+    }).catch(err => {
+        console.error('Gagal menyalin text: ', err);
+    });
+}
+
+function downloadData(elementId, filename) {
+    const data = document.getElementById(elementId).innerText;
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    }
+
+function showFinalLogs() {
+    document.getElementById('review-ui').classList.add('hidden');
+    document.getElementById('log-ui').classList.remove('hidden');
+
+    const summaries = questions.map(q => {
+        const sessions = qSessions.filter(s => s.question_id === q.id);
+        const finalAns = userAnswers[q.id];
+        
+        const anySessionHitCorrect = sessions.some(s => s.doubt_pattern.ever_hit_correct);
+        const anySessionChangedAfterCorrect = sessions.some(s => s.doubt_pattern.changed_after_correct);
+        
+        const finalSession = sessions[sessions.length - 1];
+        const finalIsIdeal = finalSession ? finalSession.is_ideal_duration : false;
+
+        return {
+            question_id: q.id,
+            topic: q.topic,
+            difficulty: q.difficulty,
+            summary: {
+                total_duration_sec: parseFloat(sessions.reduce((a, b) => a + b.duration_sec, 0).toFixed(2)),
+                visit_count: sessions.length,
+                final_is_correct: finalAns?.choice === q.answer ? 1 : 0, 
+                final_is_ideal_duration: finalIsIdeal,
+                max_hint_unlocked: finalAns?.hintLevel || 0,
+                total_hint_read_sec: parseFloat(sessions.reduce((a, b) => a + (b.hint_read_duration_sec || 0), 0).toFixed(2)),
+                first_confidence: sessions[0]?.confidence,
+                final_confidence: finalAns?.conf,
+                total_answer_changes: sessions.reduce((a, b) => a + b.answer_changes, 0), 
+                struggle_indicators: {
+                    ever_selected_correct_answer: anySessionHitCorrect,
+                    changed_mind_after_correct: anySessionChangedAfterCorrect
+                },
+                focus_loss_total: sessions.reduce((a, b) => a + b.focus_lost_count, 0)
+            }
+        };
+    });
+
+    document.getElementById('q-session-log').innerText = JSON.stringify(qSessions, null, 2);
+    document.getElementById('summary-log').innerText = JSON.stringify(summaries, null, 2);
+}
+
+window.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>
