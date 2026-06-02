@@ -3,169 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamified Educational Data Collector</title>
+    <title>Gamified Educational Data Collector (Final - ZIP & Review)</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
     <style>
         :root { 
-            /* Vibrant Gamified Palette */
             --primary: #8b5cf6; 
             --primary-shadow: #6d28d9;
             --secondary: #64748b; 
-            
-            /* Action Colors */
             --yakin: #22c55e;
             --yakin-shadow: #166534;
             --ragu: #f59e0b;
             --ragu-shadow: #b45309;
             --tidaktahu: #f43f5e;
             --tidaktahu-shadow: #be123c;
-            
             --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 100%);
             --card-bg: #ffffff;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Nunito', sans-serif; 
-            background: var(--bg-gradient); 
-            padding: 20px; 
-            color: #334155; 
-            line-height: 1.6; 
-            min-height: 100vh;
-        }
+        body { font-family: 'Nunito', sans-serif; background: var(--bg-gradient); padding: 20px; color: #334155; line-height: 1.6; min-height: 100vh; }
         
-        /* Layout Wrappers */
         .layout-wrapper { display: flex; gap: 24px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
         
-        /* Sidebar (Left) */
-        .sidebar { 
-            flex: 0 0 340px; 
-            background: var(--card-bg); 
-            padding: 24px; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
-            border: 4px solid #fff;
-            position: sticky; 
-            top: 20px; 
-        }
-        
-        /* Main Content (Right) */
-        .main-content { 
-            flex: 1; 
-            background: var(--card-bg); 
-            padding: 32px 40px; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
-            border: 4px solid #fff;
-            min-width: 0; 
-            transition: background-color 0.4s ease, border-color 0.4s ease;
-        }
+        .sidebar { flex: 0 0 340px; background: var(--card-bg); padding: 24px; border-radius: 24px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 4px solid #fff; position: sticky; top: 20px; }
+        .main-content { flex: 1; background: var(--card-bg); padding: 32px 40px; border-radius: 24px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 4px solid #fff; min-width: 0; transition: background-color 0.4s ease, border-color 0.4s ease; }
 
-        /* Panel Colored States */
         .main-content.panel-yakin { background-color: #f0fdf4; border-color: #bbf7d0; }
         .main-content.panel-ragu { background-color: #fffbeb; border-color: #fde047; }
         .main-content.panel-tidaktahu { background-color: #fff1f2; border-color: #fecaca; }
 
         .meta-info { display: flex; justify-content: space-between; font-size: 14px; color: var(--secondary); font-weight: 700; margin-bottom: 24px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 16px; }
         
-        /* Navigation Grid */
+        /* Grid Layouts */
         .q-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-        .nav-num { 
-            aspect-ratio: 1; 
-            border: 2px solid #cbd5e1; 
-            border-bottom-width: 4px; 
-            display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; border-radius: 12px; font-weight: 800; font-size: 16px; 
-            transition: all 0.1s ease; background: #fff; color: var(--secondary); 
-        }
+        .nav-num { aspect-ratio: 1; border: 2px solid #cbd5e1; border-bottom-width: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 12px; font-weight: 800; font-size: 16px; transition: all 0.1s ease; background: #fff; color: var(--secondary); }
         .nav-num:active { border-bottom-width: 2px; transform: translateY(2px); }
         .nav-num:hover:not(.active) { background: #f8fafc; }
         
-        /* Nav States */
+        /* Nav States (Pre-Submit) */
         .nav-num.active { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 0 4px #ddd6fe; }
         .nav-num.yakin { background: #dcfce7; color: #15803d; border-color: var(--yakin); }
         .nav-num.ragu { background: #fef3c7; color: #b45309; border-color: var(--ragu); }
         .nav-num.tidaktahu { background: #ffe4e6; color: #be123c; border-color: var(--tidaktahu); }
 
-        /* Typography & Badges */
+        /* Nav States (Post-Submit / Evaluasi) */
+        .nav-num.benar { background: #dcfce7; border-color: #22c55e; color: #15803d; }
+        .nav-num.salah { background: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+        .nav-num.kosong { background: #f1f5f9; border-color: #94a3b8; color: #475569; }
+
         h2 { font-weight: 800; font-size: 1.4rem; margin-top: 12px; margin-bottom: 24px; color: #1e293b; }
-        .badge { font-size: 12px; padding: 6px 12px; border-radius: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge { font-size: 12px; padding: 6px 12px; border-radius: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block;}
         .badge.easy { background: #dcfce7; color: #15803d; }
         .badge.medium { background: #fef9c3; color: #a16207; }
         .badge.hard { background: #fee2e2; color: #b91c1c; }
+        .badge.benar-badge { background: #22c55e; color: white; }
+        .badge.salah-badge { background: #ef4444; color: white; }
 
-        /* Hints Box */
         .hint-box { margin-bottom: 24px; padding: 20px; background: rgba(255, 255, 255, 0.6); border: 2px solid #fde68a; border-radius: 16px; display: flex; flex-direction: column; gap: 8px; }
         .hint-item { font-size: 0.95em; color: #92400e; font-weight: 600; border-bottom: 2px dotted #fcd34d; padding-bottom: 10px; }
         .hint-item:last-child { border-bottom: none; padding-bottom: 0; }
         
-        /* Options */
         .options { display: grid; gap: 14px; margin-bottom: 35px; }
-        .opt-btn { 
-            padding: 16px 24px; 
-            border: 2px solid #cbd5e1; 
-            border-bottom-width: 6px; 
-            border-radius: 16px; text-align: left; cursor: pointer; 
-            transition: all 0.1s ease; font-weight: 700; background: #fff; font-size: 16px; color: #475569;
-        }
+        .opt-btn { padding: 16px 24px; border: 2px solid #cbd5e1; border-bottom-width: 6px; border-radius: 16px; text-align: left; cursor: pointer; transition: all 0.1s ease; font-weight: 700; background: #fff; font-size: 16px; color: #475569; }
         .opt-btn:active { border-bottom-width: 2px; transform: translateY(4px); }
         .opt-btn:hover:not(.selected) { background: #f8fafc; border-color: #94a3b8; }
-        .opt-btn.selected { 
-            background: #ede9fe; 
-            border-color: var(--primary); 
-            color: var(--primary-shadow); 
-        }
+        .opt-btn.selected { background: #ede9fe; border-color: var(--primary); color: var(--primary-shadow); }
         
-        /* Confidence Buttons */
         .confidence-box { margin-bottom: 30px; padding: 24px; background: rgba(255, 255, 255, 0.5); border-radius: 20px; border: 2px dashed #cbd5e1; }
         .confidence-box label { font-size: 15px; font-weight: 800; color: #334155; display: block; margin-bottom: 16px; text-align: center; }
         .conf-group { display: flex; gap: 12px; }
-        .conf-btn { 
-            flex: 1; padding: 14px 10px; 
-            border: 2px solid #cbd5e1; border-bottom-width: 5px;
-            border-radius: 14px; font-weight: 800; font-size: 14px; 
-            cursor: pointer; transition: all 0.1s; background: #fff; color: var(--secondary); 
-            font-family: 'Nunito', sans-serif;
-        }
+        .conf-btn { flex: 1; padding: 14px 10px; border: 2px solid #cbd5e1; border-bottom-width: 5px; border-radius: 14px; font-weight: 800; font-size: 14px; cursor: pointer; transition: all 0.1s; background: #fff; color: var(--secondary); font-family: 'Nunito', sans-serif; }
         .conf-btn:active { border-bottom-width: 2px; transform: translateY(3px); }
         
         .conf-btn.yakin.selected { background: var(--yakin); border-color: var(--yakin-shadow); color: white; }
         .conf-btn.ragu.selected { background: var(--ragu); border-color: var(--ragu-shadow); color: white; }
         .conf-btn.tidaktahu.selected { background: var(--tidaktahu); border-color: var(--tidaktahu-shadow); color: white; }
 
-        /* Actions Footer */
         .footer { display: flex; justify-content: space-between; align-items: center; border-top: 2px dashed #e2e8f0; padding-top: 24px; }
         .action-group { display: flex; gap: 12px; }
         
-        /* Generic Buttons */
         .btn { padding: 14px 24px; border-radius: 14px; font-weight: 800; cursor: pointer; transition: all 0.1s; border: 2px solid transparent; border-bottom-width: 5px; font-size: 15px; font-family: 'Nunito', sans-serif; }
         .btn:active { border-bottom-width: 2px; transform: translateY(3px); }
-        
         .btn-hint { background: #fbbf24; border-color: #d97706; color: #78350f; display: flex; align-items: center; gap: 6px; }
         .btn-prev { background: #e2e8f0; border-color: #94a3b8; color: #475569; }
         .btn-next { background: var(--primary); border-color: var(--primary-shadow); color: white; }
-        .btn-submit { background: var(--yakin); border-color: var(--yakin-shadow); color: white; padding: 16px 32px; font-size: 18px; border-radius: 16px; margin-top: 10px;}
-        
-        /* Logs UI */
-        .log-section { margin-top: 24px; background: #1e293b; border-radius: 20px; padding: 4px; border: 4px solid #cbd5e1; }
-        .log-header { padding: 14px 20px; color: white; font-weight: 800; border-bottom: 2px dashed #334155; font-size: 15px;}
-        pre { color: #a5b4fc; padding: 20px; font-size: 13px; width: 100%; overflow-x: auto; margin: 0; font-family: monospace; line-height: 1.5;}
+        .btn-submit { background: var(--yakin); border-color: var(--yakin-shadow); color: white; padding: 18px 36px; font-size: 18px; border-radius: 16px; margin-top: 10px;}
         
         .hidden { display: none !important; }
-        
-        /* =========================================================
-           REVIEW UI REDESIGN - Kompak Pas 1 Halaman Tanpa Scroll PC
-           ========================================================= */
-        #review-ui { text-align: center; padding: 10px 0; }
-        .review-grid { 
-            display: grid; 
-            grid-template-columns: repeat(6, 1fr); /* 6 Kolom x 6 Baris = 36 Kotak */
-            gap: 12px; 
-            max-width: 360px; /* Diperkecil dari 450px agar pas 1 halaman penuh di layar PC */
-            margin: 20px auto; /* Mengurangi margin vertikal */
-        }
+        #review-ui, #result-ui { text-align: center; padding: 10px 0; }
+        .review-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; max-width: 360px; margin: 20px auto; }
 
-        /* Responsive */
+        /* Review Detail Panel */
+        .result-detail-box { text-align: left; background: #f8fafc; padding: 24px; border-radius: 16px; border: 2px solid #cbd5e1; margin-top: 25px; max-width: 500px; margin-left: auto; margin-right: auto; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+
         @media (max-width: 860px) {
             .layout-wrapper { flex-direction: column; }
             .sidebar { flex: none; width: 100%; position: static; padding: 20px; }
@@ -211,7 +144,7 @@
             <div class="options" id="options-list"></div>
 
             <div class="confidence-box">
-                <label>Seberapa yakin kamu dengan tebakan ini? 🤔</label>
+                <label>Seberapa yakin kamu dengan jawaban ini? 🤔</label>
                 <div class="conf-group">
                     <button class="conf-btn yakin" onclick="setConfidence('yakin')">Pasti Benar! 🤩</button>
                     <button class="conf-btn ragu" onclick="setConfidence('ragu-ragu')">Agak Ragu 🧐</button>
@@ -230,62 +163,50 @@
 
         <div id="review-ui" class="hidden">
             <h2 style="font-size: 1.8rem; color: #1e293b; margin-top: 5px;">Misi Selesai! 🎉</h2>
-            <p style="color: var(--secondary); margin-bottom: 5px; font-size: 15px; font-weight: 600;">Waktu telah dihentikan. Cek ulang jawaban yang masih ragu sebelum disetor ya!</p>
+            <p style="color: var(--secondary); margin-bottom: 5px; font-size: 15px; font-weight: 600;">Waktu dihentikan. Cek ulang indikator keraguanmu (kuning/merah) sebelum menyetor jawaban.</p>
             
-            <!-- Grid Navigasi Akhir yang Dioptimasi Tanpa Scroll PC -->
             <div class="review-grid" id="review-grid"></div>
             
-            <button class="btn btn-submit" onclick="showFinalLogs()">✅ Kunci Jawaban & Kirim Data</button>
+            <button class="btn btn-submit" onclick="submitAndShowResult()">✅ Kunci Jawaban & Kirim Data</button>
         </div>
 
-        <div id="log-ui" class="hidden">
-            <h2 style="text-align: center; margin-bottom: 30px; font-size: 1.8rem;">Misi Selesai! 🎉</h2>
-            <p style="text-align: center; color: var(--secondary); margin-bottom: 30px;">
-                Data telah berhasil direkam. Silakan unduh file di bawah ini dan unggah ke Google Form yang disediakan.
-            </p>
+        <div id="result-ui" class="hidden">
+            <h2 style="font-size: 1.8rem; color: #1e293b; margin-top: 5px;">Hasil Evaluasi 📊</h2>
+            <p style="color: var(--secondary); margin-bottom: 20px; font-size: 15px; font-weight: 600;">Data telah dibekukan. Unduh file datamu dan klik nomor di bawah untuk melihat koreksi jawaban.</p>
             
-            <div style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
-                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white; width: 100%; max-width: 300px;" 
-                        onclick="downloadData('summary-log', 'summary_data.json')">📥 Download Summary (JSON)</button>
+            <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white; margin-bottom: 20px; width: 100%; max-width: 360px;" 
+                    onclick="downloadZipData()">📥 Unduh Data Koleksi (.zip)</button>
+
+            <div class="review-grid" id="result-grid"></div>
+
+            <div id="result-detail" class="result-detail-box hidden">
+                <div style="margin-bottom: 8px;"><span id="res-badge" class="badge"></span></div>
+                <div id="res-qtext" style="font-weight: 800; font-size: 1.1rem; color: #1e293b; margin-bottom: 16px;"></div>
                 
-                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white; width: 100%; max-width: 300px;" 
-                        onclick="downloadData('q-session-log', 'session_data.json')">📥 Download Raw Sessions (JSON)</button>
+                <div style="margin-bottom: 10px; font-size: 15px;">
+                    <span style="color: var(--secondary); font-weight: 700;">Jawaban Kamu:</span><br>
+                    <span id="res-user-ans" style="font-weight: 700;"></span>
+                </div>
                 
-                <button class="btn btn-prev" style="color: var(--secondary); margin-top: 20px;" onclick="location.reload()">🔄 Petualangan Baru</button>
+                <div style="font-size: 15px;">
+                    <span style="color: var(--secondary); font-weight: 700;">Kunci Jawaban:</span><br>
+                    <span id="res-correct-ans" style="font-weight: 700; color: #15803d;"></span>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button class="btn btn-prev" onclick="location.reload()">🔄 Mulai Petualangan Baru</button>
             </div>
             
             <pre id="summary-log" class="hidden"></pre>
             <pre id="q-session-log" class="hidden"></pre>
         </div>
 
-        <!-- <div id="log-ui" class="hidden">
-            <h2 style="text-align: center; margin-bottom: 15px; font-size: 1.8rem;">Brankas Data 📂</h2>
-            
-            <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap;">
-                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white;" onclick="copyLog('summary-log', this)">📋 Salin Data Bersih</button>
-                <button class="btn" style="background: var(--primary); border-color: var(--primary-shadow); color: white;" onclick="copyLog('q-session-log', this)">📋 Salin Data Mentah</button>
-                <button class="btn btn-prev" style="color: var(--secondary);" onclick="location.reload()">🔄 Petualangan Baru</button>
-            </div>
-            
-            <div class="log-section">
-                <div class="log-header">
-                    <span>📊 Summary (Fitur Bersih)</span>
-                </div>
-                <pre id="summary-log"></pre>
-            </div>
-
-            <div class="log-section" style="margin-top: 30px;">
-                <div class="log-header">
-                    <span>📝 Q_Sessions (Data Mentah)</span>
-                </div>
-                <pre id="q-session-log"></pre>
-            </div>
-        </div> -->
-
     </main>
 </div>
 
 <script src="soal.js"></script>
+
 <script>
 let questions = []; 
 let currentIdx = 0;
@@ -328,12 +249,8 @@ function initApp() {
     if (typeof fullBank !== 'undefined' && fullBank.length > 0) {
         questions = stratifyAndShuffle(fullBank);
         document.getElementById('global-id-label').innerText = "ID: " + globalSessionId;
-        
-        if(questions.length > 0) {
-            initQ(0);
-        } else {
-            document.getElementById('q-text').innerText = "Gagal memproses pengacakan soal.";
-        }
+        if(questions.length > 0) initQ(0);
+        else document.getElementById('q-text').innerText = "Gagal memproses pengacakan soal.";
     } else {
         document.getElementById('q-text').innerText = "Error: File 'soal.js' tidak terdeteksi atau kosong.";
     }
@@ -434,11 +351,8 @@ function setConfidence(val) {
     const qId = questions[currentIdx].id;
     if(!userAnswers[qId]) userAnswers[qId] = {};
     userAnswers[qId].conf = val;
-    
     updateMainPanelUI();
-    if(userAnswers[qId].choice !== undefined) {
-        renderNav('q-nav-grid');
-    }
+    if(userAnswers[qId].choice !== undefined) renderNav('q-nav-grid');
 }
 
 function trackFirstAction() {
@@ -565,7 +479,6 @@ function jumpTo(idx) {
     document.getElementById('review-ui').classList.add('hidden');
     document.getElementById('quiz-ui').classList.remove('hidden');
     document.getElementById('sidebar-ui').classList.remove('hidden'); 
-    
     document.getElementById('main-panel').classList.remove('panel-yakin', 'panel-ragu', 'panel-tidaktahu');
     
     if(!document.getElementById('quiz-ui').classList.contains('hidden')){
@@ -582,9 +495,7 @@ function nextQ() {
         captureSession();
         document.getElementById('quiz-ui').classList.add('hidden');
         document.getElementById('sidebar-ui').classList.add('hidden'); 
-        
         document.getElementById('main-panel').classList.remove('panel-yakin', 'panel-ragu', 'panel-tidaktahu');
-        
         document.getElementById('review-ui').classList.remove('hidden');
         renderNav('review-grid');
     }
@@ -598,7 +509,6 @@ function renderNav(containerId) {
     nav.innerHTML = '';
     questions.forEach((q, i) => {
         const d = document.createElement('div');
-        
         let confClass = '';
         const ans = userAnswers[q.id];
         
@@ -615,41 +525,14 @@ function renderNav(containerId) {
     });
 }
 
-function copyLog(elementId, btnElement) {
-    const textToCopy = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        const originalText = btnElement.innerHTML;
-        
-        btnElement.innerHTML = "✓ Berhasil Disalin!";
-        btnElement.style.background = "var(--yakin)";
-        btnElement.style.borderColor = "var(--yakin-shadow)";
-        
-        setTimeout(() => {
-            btnElement.innerHTML = originalText;
-            btnElement.style.background = "var(--primary)";
-            btnElement.style.borderColor = "var(--primary-shadow)";
-        }, 2000);
-    }).catch(err => {
-        console.error('Gagal menyalin text: ', err);
-    });
-}
+// ==========================================
+// TAHAP 3: FUNGSI SUBMIT, RENDER HASIL EVALUASI & DOWNLOAD ZIP
+// ==========================================
 
-function downloadData(elementId, filename) {
-    const data = document.getElementById(elementId).innerText;
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    }
-
-function showFinalLogs() {
+function submitAndShowResult() {
+    // Sembunyikan UI Review, Tampilkan UI Result Evaluasi
     document.getElementById('review-ui').classList.add('hidden');
-    document.getElementById('log-ui').classList.remove('hidden');
+    document.getElementById('result-ui').classList.remove('hidden');
 
     const summaries = questions.map(q => {
         const sessions = qSessions.filter(s => s.question_id === q.id);
@@ -684,8 +567,104 @@ function showFinalLogs() {
         };
     });
 
+    // Simpan string JSON ke DOM untuk diambil oleh JSZip nanti
     document.getElementById('q-session-log').innerText = JSON.stringify(qSessions, null, 2);
     document.getElementById('summary-log').innerText = JSON.stringify(summaries, null, 2);
+
+    renderResultGrid(); // Tampilkan kotak warna-warni Benar/Salah
+}
+
+function renderResultGrid() {
+    const grid = document.getElementById('result-grid');
+    grid.innerHTML = '';
+    
+    questions.forEach((q, i) => {
+        const box = document.createElement('div');
+        const userChoice = userAnswers[q.id]?.choice;
+        
+        // Cek status jawaban
+        let statusClass = 'kosong'; 
+        if (userChoice !== undefined) {
+            statusClass = (userChoice === q.answer) ? 'benar' : 'salah';
+        }
+
+        box.className = `nav-num ${statusClass}`;
+        box.innerText = i + 1;
+        
+        // Beri interaksi klik untuk melihat detail
+        box.onclick = () => showResultDetail(i, statusClass);
+        grid.appendChild(box);
+    });
+}
+
+function showResultDetail(idx, statusClass) {
+    const q = questions[idx];
+    const userChoiceIdx = userAnswers[q.id]?.choice;
+    
+    const detailPanel = document.getElementById('result-detail');
+    const badge = document.getElementById('res-badge');
+    const qText = document.getElementById('res-qtext');
+    const userAnsText = document.getElementById('res-user-ans');
+    const correctAnsText = document.getElementById('res-correct-ans');
+
+    // Setup Teks Soal
+    qText.innerText = q.text;
+
+    // Setup Jawaban User
+    if (userChoiceIdx !== undefined) {
+        userAnsText.innerText = q.choices[userChoiceIdx];
+        if (statusClass === 'benar') {
+            userAnsText.style.color = '#15803d'; // Hijau
+            badge.innerText = 'Jawaban Benar ✅';
+            badge.className = 'badge benar-badge';
+        } else {
+            userAnsText.style.color = '#b91c1c'; // Merah
+            badge.innerText = 'Jawaban Salah ❌';
+            badge.className = 'badge salah-badge';
+        }
+    } else {
+        userAnsText.innerText = "Tidak Dijawab 🤷";
+        userAnsText.style.color = '#475569';
+        badge.innerText = 'Kosong ⚠️';
+        badge.className = 'badge';
+        badge.style.background = '#e2e8f0';
+    }
+
+    // Setup Kunci Jawaban
+    correctAnsText.innerText = q.choices[q.answer];
+
+    // Munculkan panel
+    detailPanel.classList.remove('hidden');
+}
+
+// Fungsi Download menggunakan JSZip
+function downloadZipData() {
+    if (typeof JSZip === 'undefined') {
+        alert("Library JSZip belum termuat. Pastikan Anda terkoneksi ke internet untuk fitur download ZIP.");
+        return;
+    }
+
+    const zip = new JSZip();
+    
+    // Ambil string JSON dari elemen hidden
+    const summaryData = document.getElementById('summary-log').innerText;
+    const sessionData = document.getElementById('q-session-log').innerText;
+
+    // Masukkan ke dalam zip
+    zip.file("summary_data.json", summaryData);
+    zip.file("session_data.json", sessionData);
+
+    // Generate dan Trigger Download
+    zip.generateAsync({type:"blob"}).then(function(content) {
+        const url = URL.createObjectURL(content);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Data_Koleksi_${globalSessionId}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
 }
 
 window.addEventListener('DOMContentLoaded', initApp);
