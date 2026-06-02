@@ -2,7 +2,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-001",
     "topic": "Simple Present Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "My father __________ breakfast at 6:30 AM every day.",
     "choices": [
       "eat",
@@ -21,7 +21,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-002",
     "topic": "Simple Present Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "They __________ like to watch horror movies because they get scared easily.",
     "choices": [
       "doesn't",
@@ -40,7 +40,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-003",
     "topic": "Simple Present Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "__________ your sister live in Jakarta?",
     "choices": [
       "Do",
@@ -59,7 +59,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-004",
     "topic": "Simple Present Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "She always __________ her homework right after dinner.",
     "choices": [
       "do",
@@ -78,7 +78,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-005",
     "topic": "Simple Present Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "The students __________ English every Tuesday morning.",
     "choices": [
       "studies",
@@ -97,7 +97,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-006",
     "topic": "Simple Present Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Mark __________ late for his morning classes; he is a very disciplined student.",
     "choices": [
       "is seldom",
@@ -116,7 +116,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-007",
     "topic": "Simple Present Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "I __________ what you mean, so you don't need to explain it again.",
     "choices": [
       "am knowing",
@@ -135,7 +135,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-008",
     "topic": "Simple Present Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Light __________ faster than sound, which is why we see lightning before we hear thunder.",
     "choices": [
       "travel",
@@ -154,7 +154,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-009",
     "topic": "Simple Present Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Jessica __________ coffee in the evening because it keeps her awake.",
     "choices": [
       "drinks rarely",
@@ -173,7 +173,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-010",
     "topic": "Simple Present Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "This high-end laptop __________ to the marketing department.",
     "choices": [
       "belongs",
@@ -192,7 +192,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-011",
     "topic": "Simple Present Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "The international flight to New York __________ at 8:00 PM tomorrow, so we must arrive at the airport early.",
     "choices": [
       "left",
@@ -211,7 +211,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-012",
     "topic": "Simple Present Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Everybody in the corporate office __________ required to submit their weekly reports by Friday afternoon.",
     "choices": [
       "be",
@@ -230,7 +230,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-013",
     "topic": "Simple Present Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "As soon as the keynote speaker __________, we will begin the main presentation.",
     "choices": [
       "is arriving",
@@ -249,7 +249,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-014",
     "topic": "Simple Present Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Neither of the candidates __________ the specific qualifications required for this executive position.",
     "choices": [
       "possess",
@@ -268,7 +268,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-015",
     "topic": "Simple Present Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "We will cancel the outdoor gala if it __________ heavily tomorrow evening.",
     "choices": [
       "rained",
@@ -287,7 +287,7 @@ const fullBank = [
     {
     "id": "Q-ENG-PCT-001",
     "topic": "Present Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "Look! The children __________ in the swimming pool right now.",
     "choices": [
       "swim",
@@ -306,7 +306,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-002",
     "topic": "Present Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "Listen carefully. The teacher __________ speaking to the other class; she is waiting for us.",
     "choices": [
       "is not",
@@ -325,7 +325,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-003",
     "topic": "Present Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "__________ you working on the monthly financial report at the moment?",
     "choices": [
       "Do",
@@ -344,7 +344,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-004",
     "topic": "Present Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "Be quiet, please. The manager __________ an important email to the clients.",
     "choices": [
       "is writeing",
@@ -363,7 +363,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-005",
     "topic": "Present Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "Where is John? Oh, he __________ his car in the driveway.",
     "choices": [
       "washes",
@@ -382,7 +382,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPT-006",
     "topic": "Present Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "My sister usually lives in London, but she __________ with us in Bandung this month.",
     "choices": [
       "stays",
@@ -401,7 +401,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-007",
     "topic": "Present Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "The company's market share __________ rapidly due to the new marketing strategy.",
     "choices": [
       "grows",
@@ -420,7 +420,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-008",
     "topic": "Present Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "You __________ your car keys! Please try to be more organized.",
     "choices": [
       "always lose",
@@ -439,7 +439,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-009",
     "topic": "Present Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "I __________ a fascinating novel about cybersecurity these days, but I left it at home today.",
     "choices": [
       "read",
@@ -458,7 +458,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-010",
     "topic": "Present Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "I __________ about moving to a new apartment next semester, but I haven't decided yet.",
     "choices": [
       "think",
@@ -477,7 +477,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-011",
     "topic": "Present Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "We __________ a high-level meeting with the regional directors this Friday at 10 AM; everything is already booked.",
     "choices": [
       "hold",
@@ -496,7 +496,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-012",
     "topic": "Present Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Don't take him seriously. He __________ difficult just to test your patience.",
     "choices": [
       "is",
@@ -515,7 +515,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-013",
     "topic": "Present Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "The chef __________ the soup to check if it needs more salt before serving it to the guests.",
     "choices": [
       "tastes",
@@ -534,7 +534,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-014",
     "topic": "Present Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Our IT team __________ extreme difficulty resolving the server outage right now.",
     "choices": [
       "has",
@@ -553,7 +553,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PCT-015",
     "topic": "Present Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Dr. Roberts __________ patients all afternoon, so he cannot take your call right now.",
     "choices": [
       "is seeing",
@@ -572,7 +572,7 @@ const fullBank = [
     {
     "id": "Q-ENG-PPT-001",
     "topic": "Present Perfect Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "She __________ her keys, so she can't get into her apartment right now.",
     "choices": [
       "lose",
@@ -591,7 +591,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-002",
     "topic": "Present Perfect Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "We have __________ this movie twice already, but we still enjoy it.",
     "choices": [
       "see",
@@ -610,7 +610,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-003",
     "topic": "Present Perfect Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "The package __________ arrived yet, so please check the tracking number again.",
     "choices": [
       "has not",
@@ -629,7 +629,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-004",
     "topic": "Present Perfect Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "Mr. Davis has worked as a senior software engineer at this company __________ five years.",
     "choices": [
       "since",
@@ -648,7 +648,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-005",
     "topic": "Present Perfect Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "__________ you ever eaten authentic Indonesian rendang before?",
     "choices": [
       "Do",
@@ -667,7 +667,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-006",
     "topic": "Present Perfect Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "I __________ my assignment last night, but I haven't submitted it to the portal yet.",
     "choices": [
       "finished",
@@ -686,7 +686,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-007",
     "topic": "Present Perfect Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Don't worry about ordering lunch; I have __________ prepared everything for the team.",
     "choices": [
       "yet",
@@ -705,7 +705,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-008",
     "topic": "Present Perfect Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Where is Sarah? She isn't at her desk. — Oh, she __________ to the cafeteria to get some coffee.",
     "choices": [
       "has been",
@@ -724,7 +724,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-009",
     "topic": "Present Perfect Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "The tech industry __________ significant changes lately due to rapid advancements in AI.",
     "choices": [
       "experienced",
@@ -743,7 +743,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-010",
     "topic": "Present Perfect Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "They have achieved great success since they __________ their startup three years ago.",
     "choices": [
       "launched",
@@ -762,7 +762,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-011",
     "topic": "Present Perfect Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "This is the first time that our development team __________ such a complex system architecture.",
     "choices": [
       "handles",
@@ -781,7 +781,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-012",
     "topic": "Present Perfect Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "This is the most insightful seminar on digital forensics that I __________.",
     "choices": [
       "have ever attended",
@@ -800,7 +800,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-013",
     "topic": "Present Perfect Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Global temperatures __________ noticeably over the past few decades, causing serious environmental concerns.",
     "choices": [
       "rose",
@@ -819,7 +819,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-014",
     "topic": "Present Perfect Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Each of the newly appointed executives __________ successfully completed the rigorous training program.",
     "choices": [
       "have",
@@ -838,7 +838,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPT-015",
     "topic": "Present Perfect Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "You can log off the system as soon as you __________ downloading the forensic image.",
     "choices": [
       "will finish",
@@ -857,7 +857,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-001",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "She is very tired because she __________ in the garden for three hours.",
     "choices": [
       "works",
@@ -876,7 +876,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-002",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "They __________ for the laboratory bus since 8 o'clock this morning.",
     "choices": [
       "have been waiting",
@@ -895,7 +895,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-003",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "__________ you been learning English for a long time?",
     "choices": [
       "Do",
@@ -914,7 +914,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-004",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "It __________ raining all morning, so the grass is completely wet.",
     "choices": [
       "is",
@@ -933,7 +933,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-005",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "The dog __________ barking for the past twenty minutes; I wonder what is wrong.",
     "choices": [
       "barks",
@@ -952,7 +952,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-006",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Your hands are covered in grease! — Yes, I __________ my bicycle.",
     "choices": [
       "repair",
@@ -971,7 +971,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-007",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Lately, Sarah __________ very hard to pass her Full-Stack Web Development exams.",
     "choices": [
       "studies",
@@ -990,7 +990,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-008",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "We __________ about the new project proposal for over an hour now, but we haven't reached a conclusion.",
     "choices": [
       "debate",
@@ -1009,7 +1009,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-009",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "Why are your eyes red? __________ you __________ onions in the kitchen?",
     "choices": [
       "Did you chop",
@@ -1028,7 +1028,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-010",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "He __________ Java programming since he started his tech internship last month.",
     "choices": [
       "practices",
@@ -1047,7 +1047,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-011",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "The entire IT department __________ to resolve the database anomaly since dawn.",
     "choices": [
       "is trying",
@@ -1066,7 +1066,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-012",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Each of the data analysts __________ the network logs for cybersecurity vulnerabilities since the breach occurred.",
     "choices": [
       "have been scrutinizing",
@@ -1085,7 +1085,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-013",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "The automated backup script __________ in the background for twelve hours without generating any errors.",
     "choices": [
       "runs",
@@ -1104,7 +1104,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-014",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Why is the server room so hot? — The central air conditioning system __________ properly all day.",
     "choices": [
       "does not function",
@@ -1123,7 +1123,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PPCT-015",
     "topic": "Present Perfect Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "He is completely out of breath because he __________ back and forth between the server room and the executive office.",
     "choices": [
       "runs",
@@ -1142,7 +1142,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-001",
     "topic": "Simple Past Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "The team __________ the project milestone yesterday afternoon.",
     "choices": [
       "celebrates",
@@ -1161,7 +1161,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-002",
     "topic": "Simple Past Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "We __________ a new server rack for our Bandung data center last week.",
     "choices": [
       "buy",
@@ -1180,7 +1180,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-003",
     "topic": "Simple Past Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "She __________ attend the full-stack web development webinar yesterday.",
     "choices": [
       "doesn't",
@@ -1199,7 +1199,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-004",
     "topic": "Simple Past Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "__________ you finish configuring the router last night?",
     "choices": [
       "Do",
@@ -1218,7 +1218,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-005",
     "topic": "Simple Past Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "The system administrators __________ very busy during the network outage last night.",
     "choices": [
       "are",
@@ -1237,7 +1237,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-006",
     "topic": "Simple Past Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "The developer suddenly __________ coding when the power outage hit the building.",
     "choices": [
       "stop",
@@ -1256,7 +1256,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-007",
     "topic": "Simple Past Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "The new cloud subscription __________ the company thousands of dollars last year.",
     "choices": [
       "cost",
@@ -1275,7 +1275,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-008",
     "topic": "Simple Past Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "When I was an undergraduate student, I __________ up all night studying for exams.",
     "choices": [
       "stay",
@@ -1294,7 +1294,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-009",
     "topic": "Simple Past Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "I was reviewing the database logs when the security alarm suddenly __________.",
     "choices": [
       "rings",
@@ -1313,7 +1313,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-010",
     "topic": "Simple Past Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "The software development crew __________ satisfied with the initial beta testing results.",
     "choices": [
       "were",
@@ -1332,7 +1332,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-011",
     "topic": "Simple Past Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "After completing the database migration, the engineer __________ down to rest for an hour.",
     "choices": [
       "lay",
@@ -1351,7 +1351,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-012",
     "topic": "Simple Past Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "It is high time the security team __________ the encryption protocols for the database.",
     "choices": [
       "updates",
@@ -1370,7 +1370,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-013",
     "topic": "Simple Past Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "He spoke about the network infrastructure as though he __________ the chief architect, but he was just an intern.",
     "choices": [
       "is",
@@ -1389,7 +1389,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-014",
     "topic": "Simple Past Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Excuse me, I __________ to ask if you had a few minutes to review my thesis proposal.",
     "choices": [
       "hope",
@@ -1408,7 +1408,7 @@ const fullBank = [
   {
     "id": "Q-ENG-SPST-015",
     "topic": "Simple Past Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Neither of the systems __________ operational after the malware attack yesterday morning.",
     "choices": [
       "were",
@@ -1427,7 +1427,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-001",
     "topic": "Past Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "I __________ my computer science assignment at 9 PM last night.",
     "choices": [
       "was writing",
@@ -1446,7 +1446,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-002",
     "topic": "Past Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "The students __________ coding in the lab when the fire alarm suddenly rang.",
     "choices": [
       "was practicing",
@@ -1465,7 +1465,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-003",
     "topic": "Past Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "She __________ paying attention during the lecture, so she missed the important instructions.",
     "choices": [
       "was not",
@@ -1484,7 +1484,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-004",
     "topic": "Past Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "__________ you downloading the software patch when the operating system crashed?",
     "choices": [
       "Was",
@@ -1503,7 +1503,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-005",
     "topic": "Past Continuous Tense",
-    "difficulty": "Beginner",
+    "difficulty": "Easy",
     "text": "While they __________ the network architecture, the power went out.",
     "choices": [
       "discussed",
@@ -1522,7 +1522,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-006",
     "topic": "Past Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "While the backend team was debugging the server, the frontend team __________ the user interface.",
     "choices": [
       "optimized",
@@ -1541,7 +1541,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-007",
     "topic": "Past Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "At exactly this time yesterday, we __________ across the Atlantic on our way to the tech conference in New York.",
     "choices": [
       "flew",
@@ -1560,7 +1560,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-008",
     "topic": "Past Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "The sun __________ and birds were singing when she stepped out to attend her first university lecture.",
     "choices": [
       "shone",
@@ -1579,7 +1579,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-009",
     "topic": "Past Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "I __________ a strange noise coming from the server room while I was walking down the hallway.",
     "choices": [
       "was hearing",
@@ -1598,7 +1598,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-010",
     "topic": "Past Continuous Tense",
-    "difficulty": "Intermediate",
+    "difficulty": "Medium",
     "text": "When he worked as an intern here, he __________ about the slow internet connection.",
     "choices": [
       "always complained",
@@ -1617,7 +1617,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-011",
     "topic": "Past Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "I __________ if you had a few minutes to help me debug this database connection script.",
     "choices": [
       "was wondering",
@@ -1636,7 +1636,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-012",
     "topic": "Past Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Everybody in the engineering department __________ working overtime when the central server migration failed.",
     "choices": [
       "was",
@@ -1655,7 +1655,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-013",
     "topic": "Past Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "I __________ to sign up for the cybersecurity bootcamp, but the registration closed earlier than expected.",
     "choices": [
       "was intending",
@@ -1674,7 +1674,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-014",
     "topic": "Past Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "Neither of the primary servers __________ functioning properly while the network cyberattack was underway.",
     "choices": [
       "was",
@@ -1693,7 +1693,7 @@ const fullBank = [
   {
     "id": "Q-ENG-PSCT-015",
     "topic": "Past Continuous Tense",
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "text": "When the CEO walked into the room, the developers __________ the new application features.",
     "choices": [
       "demonstrated",
